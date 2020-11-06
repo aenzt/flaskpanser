@@ -1,0 +1,10 @@
+env/
+.vscode/
+__pycache__/
+distribution/
+app1.py
+as.py
+posttest.py
+ts.py
+tsi.py
+tugas.py

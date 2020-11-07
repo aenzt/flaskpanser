@@ -151,21 +151,45 @@ def post3():
 
     return res
 
+@app.route('/maju', methods = ['POST', 'GET'])
+def maju():
+    maju = request.form['maju']
+    sendmaju = aio.feeds('maju')
+    aio.send_data(sendmaju.key, maju)
+    print(maju)
+
+    return jsonify(terimamaju = maju)
+
+@app.route('/pompa', methods = ['POST', 'GET'])
+def pompaon():
+    pompa = request.form['pompa']
+    sendpompa = aio.feeds('pompa')
+    aio.send_data(sendpompa.key, pompa)
+    print(pompa)
+
+    return jsonify(terimamaju = pompa)
+
 @app.route('/update')
 def update ():
     r = aio.receive('servo')
     s = aio.receive('servo1')
     t = aio.receive('servo2')
     u = aio.receive('photocell')
+    v = aio.receive('maju')
+    w = aio.receive('pompa')
     #feed = js_obj ['feed_key']
     servoval = int(r.value)
     servo1val = int(s.value)
     servo2val = int(t.value)
     photocellval = int(u.value)
+    majuval = int(v.value)
+    pompaval = int(w.value)
     return jsonify(servoval=servoval,
                     servo1val=servo1val,
                     servo2val=servo2val,
-                    photocellval=photocellval) 
+                    photocellval=photocellval,
+                    majuval=majuval,
+                    pompaval=pompaval) 
 
 @app.route('/logout')
 @login_required

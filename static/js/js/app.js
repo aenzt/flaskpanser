@@ -10,11 +10,15 @@ $(document).ready(function() {
     const output1 = document.getElementById("out1");
     const output2 = document.getElementById("out2");
     const output3 = document.getElementById("out3");
+    const but1 = document.getElementById("but1");
+    const but2 = document.getElementById("but2");
+    const but3 = document.getElementById("but3");
+    const but4 = document.getElementById("but4");
 
     async function getISS() {
         const response = await fetch(api_url);
         const data = await response.json();
-        const { servoval, servo1val, servo2val, photocellval } = data;
+        const { servoval, servo1val, servo2val, photocellval, majuval, pompaval } = data;
 
         document.getElementById('valueservo').textContent = servoval;
         document.getElementById('valueservo1').textContent = servo1val;
@@ -61,10 +65,46 @@ $(document).ready(function() {
         });
     };
 
+    async function maju() {
+
+        req = $.ajax({
+            url : '/maju',
+            type : 'POST',
+            data : { maju : 1 }
+        });
+    };
+
+    async function mundur() {
+
+        req = $.ajax({
+            url : '/maju',
+            type : 'POST',
+            data : { maju : 0 }
+        });
+    };
+
+    async function pompaon() {
+
+        req = $.ajax({
+            url : '/pompa',
+            type : 'POST',
+            data : { pompa : 1 }
+        });
+    };
+
+    async function pompaoff() {
+
+        req = $.ajax({
+            url : '/pompa',
+            type : 'POST',
+            data : { pompa : 0 }
+        });
+    };
+
     async function setData() {
         const response = await fetch(api_url);
         const data = await response.json();
-        const { servoval, servo1val, servo2val, photocellval } = data;
+        const { servoval, servo1val, servo2val, photocellval, majuval, pompaval } = data;
         value1 = servoval;
         value2 = servo1val;
         value3 = servo2val;
@@ -88,33 +128,43 @@ $(document).ready(function() {
     val1.onchange = function() {
         postVal1();
         getISS();
-    }
+    };
 
     val1.oninput = function() {
         output1.textContent = this.value;
-    }
+    };
 
     val2.onchange = function() {
         postVal2();
         getISS();
-    }
+    };
 
     val2.oninput = function() {
         output2.textContent = this.value;
-    }
+    };
 
     val3.onchange = function() {
         postVal3();
         getISS();
-    }
+    };
 
     val3.oninput = function() {
         output3.textContent = this.value;
-    }
+    };
 
-    $('#ex1').slider({
-    formatter: function(value) {
-        return 'Current value: ' + value;
-    }
-    });
+    but1.onclick = function() {
+        maju();
+    };
+
+    but2.onclick = function() {
+        mundur();
+    };
+
+    but3.onclick = function() {
+        pompaon();
+    };
+
+    but4.onclick = function() {
+        pompaoff();
+    };
 });

@@ -15,11 +15,11 @@ from Adafruit_IO import Client
 
 app = Flask(__name__)
 app.config['SECRET_KEY']= '5RandomStrings'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:ghazial06@localhost/flaskapp'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'SQL'
 app.config['SECURITY_PASSWORD_SALT'] = 'thisissecretsalt'
 app.config['SECURITY_USER_IDENTITY_ATTRIBUTES'] = ('username','email')
 
-aio = Client('raihanpl', 'aio_hGHF14BX49K1gThdYqcX5eoCjFrq')
+aio = Client('raihanpl', 'KEY')
 
 db = SQLAlchemy(app)
 
